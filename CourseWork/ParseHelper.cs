@@ -6,6 +6,7 @@ using HtmlAgilityPack;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace CourseWork
 {
@@ -41,8 +42,9 @@ namespace CourseWork
             if (tbody != null && tbody.ChildNodes.Count>1)
             {
                 var trs = tbody.SelectNodes("//tr");
-
-                for (int i = 1; i < trs.Count;i++)
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                ParallelLoopResult result = Parallel.For(1, trs.Count, (i, s) =>
                 {
                     try
                     {
@@ -50,7 +52,9 @@ namespace CourseWork
                         links.Add($"{url.Scheme}://{url.Authority}{link}");
                     }
                     catch { }
-                } 
+
+                });
+                sw.Stop();
             }
             else
             {
