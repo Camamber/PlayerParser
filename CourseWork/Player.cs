@@ -8,9 +8,10 @@ namespace CourseWork
 {
     class Player
     {
-        public Player()
+        public string name;
+        public Player(string name)
         {
-
+            this.name = name;
         }
 
         public string Nickname { get; set; }

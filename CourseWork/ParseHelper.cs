@@ -16,6 +16,7 @@ namespace CourseWork
     class ParseHelper
     {
         List<string> links;
+        List<Player> players;
         public ParseHelper(List<string> playersLinks, ParallelMethod method)
         {
 
@@ -70,12 +71,20 @@ namespace CourseWork
 
         public void Parse()
         {
-            int count = 100;
+            players = new List<Player>();
+            int count = 400;
             for(int i = 0; i < links.Count; i+= count)
             {
                 Parser p = new Parser(links, i, i + count > links.Count ? links.Count : i + count);
+                p.OnPlayerParsed += Player_OnPlayerParsed;
                 p.Start();
+                p.Join();
             }        
+        }
+
+        private void Player_OnPlayerParsed(Player p)
+        {
+            players.Add(p);
         }
     }
 }
