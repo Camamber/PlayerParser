@@ -48,6 +48,7 @@
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(561, 23);
             this.tbUrl.TabIndex = 0;
+            this.tbUrl.Text = "https://liquipedia.net/dota2/Players_(all)";
             // 
             // lblUrl
             // 
@@ -75,7 +76,7 @@
             // lbPlayers
             // 
             this.lbPlayers.FormattingEnabled = true;
-            this.lbPlayers.Location = new System.Drawing.Point(12, 77);
+            this.lbPlayers.Location = new System.Drawing.Point(15, 64);
             this.lbPlayers.Name = "lbPlayers";
             this.lbPlayers.Size = new System.Drawing.Size(182, 251);
             this.lbPlayers.TabIndex = 3;

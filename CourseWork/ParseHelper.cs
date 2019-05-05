@@ -17,6 +17,8 @@ namespace CourseWork
     {
         List<string> links;
         List<Player> players;
+
+        Object lockMe = new Object();
         public ParseHelper(List<string> playersLinks, ParallelMethod method)
         {
 
@@ -32,36 +34,43 @@ namespace CourseWork
 
         private List<string> GetPlayersLinks(Uri url)
         {
-            List<string> links = new List<string>();
+            List<string> ls = new List<string>();
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             HtmlWeb web = new HtmlWeb();
             HtmlDocument htmlDoc = web.Load(url);
-           
+
             var tbody = htmlDoc.DocumentNode.SelectSingleNode("/html/body//tbody");
-            if (tbody != null && tbody.ChildNodes.Count>1)
+            if (tbody != null && tbody.ChildNodes.Count > 1)
             {
                 var trs = tbody.SelectNodes("//tr");
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
+
+                //for (int i = 1; i < trs.Count; i++)
+                //{
+                //    string link = trs[i].ChildNodes[3].FirstChild.Attributes["href"].Value;
+                //    ls.Add(String.Format(@"{0}://{1}{2}", url.Scheme, url.Authority, link));
+                //}
+
                 ParallelLoopResult result = Parallel.For(1, trs.Count, (i, s) =>
                 {
-                    try
+                   
+                    string link = trs[i].ChildNodes[3].FirstChild.Attributes["href"].Value;
+                    lock (lockMe)
                     {
-                        string link = trs[i].ChildNodes[3].FirstChild.Attributes["href"].Value;
-                        links.Add($"{url.Scheme}://{url.Authority}{link}");
+                        ls.Add(String.Format(@"{0}://{1}{2}", url.Scheme, url.Authority, link));
                     }
-                    catch { }
-
                 });
+
                 sw.Stop();
             }
             else
             {
                 throw new NullReferenceException("Cant find table. Wrong url was provided");
             }
-            return links;
+            return ls;
         }
 
         public string[] PlayersLinks

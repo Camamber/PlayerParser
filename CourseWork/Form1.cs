@@ -30,8 +30,14 @@ namespace CourseWork
             {
                 parser = new ParseHelper(tbUrl.Text, ParallelMethod.Threads);
                 foreach (string link in parser.PlayersLinks)
+                {
                     if (link != null)
                         lbPlayers.Items.Add(link);
+                    else
+                    {
+                        MessageBox.Show("ghf");
+                    }
+                }
                 parser.Parse();
             }
             catch (NullReferenceException ex)
