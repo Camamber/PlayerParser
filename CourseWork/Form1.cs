@@ -13,6 +13,7 @@ namespace CourseWork
     public partial class Form1 : Form
     {
         ParseHelper parser;
+        int left, succes;
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +21,6 @@ namespace CourseWork
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void btnParse_Click(object sender, EventArgs e)
@@ -29,21 +29,48 @@ namespace CourseWork
             try
             {
                 parser = new ParseHelper(tbUrl.Text, ParallelMethod.Threads);
-                foreach (string link in parser.PlayersLinks)
-                {
-                    if (link != null)
-                        lbPlayers.Items.Add(link);
-                    else
-                    {
-                        MessageBox.Show("ghf");
-                    }
-                }
-                parser.Parse();
+                parser.OnPlayerProcessed += Parser_OnPlayerProcessed; ;
+                tspbProgress.Maximum = parser.PlayersLinksCount;
+                left = parser.PlayersLinksCount;
+                succes = 0;
+                tslLeft.Text = $"Left: {left}";
+                tslSuccess.Text = $"Success: {succes}";
+
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void RecievePlayer(Player player)
+        {
+            tspbProgress.Increment(1);
+            left--; succes++;
+            tslLeft.Text = $"Left: {left}";
+            tslSuccess.Text = $"Success: {succes}";
+            lbPlayers.Items.Add(player.Name);
+            
+        }
+
+        private void Parser_OnPlayerProcessed(Player player)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<Player>((p) => {
+                    RecievePlayer(p);
+                }), player);
+                
+            }
+            else
+            {
+                RecievePlayer(player);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            parser.Parse();
         }
     }
 }

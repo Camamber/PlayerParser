@@ -18,6 +18,9 @@ namespace CourseWork
         List<string> links;
         List<Player> players;
 
+        public delegate void OnPlayerProcessedHandler(Player p);
+        public event OnPlayerProcessedHandler OnPlayerProcessed;
+
         Object lockMe = new Object();
         public ParseHelper(List<string> playersLinks, ParallelMethod method)
         {
@@ -77,23 +80,28 @@ namespace CourseWork
         {
             get{ return links.ToArray(); }
         }
-
+        public int PlayersLinksCount
+        {
+            get { return links.Count; }
+        }
+        
         public void Parse()
         {
             players = new List<Player>();
-            int count = 400;
-            for(int i = 0; i < links.Count; i+= count)
+            int count = 10;
+            for(int i = 0; i < 50; i+= count)
             {
                 Parser p = new Parser(links, i, i + count > links.Count ? links.Count : i + count);
                 p.OnPlayerParsed += Player_OnPlayerParsed;
                 p.Start();
-                p.Join();
+                //p.Join();
             }        
         }
 
         private void Player_OnPlayerParsed(Player p)
         {
             players.Add(p);
+            OnPlayerProcessed(p);
         }
     }
 }
