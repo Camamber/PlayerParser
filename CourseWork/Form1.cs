@@ -68,6 +68,7 @@ namespace CourseWork
             if (parserHelper != null)
             {
                 parserHelper.Parse(slideSwitch.Value == 0 ? (int)numStep.Value : (int)numThreads.Value, slideSwitch.Value == 0);
+                tslThreads.Text = $"Threads:  { (slideSwitch.Value == 0 ? Math.Ceiling(parserHelper.PlayersLinksCount/ numStep.Value).ToString() : numThreads.Value.ToString())}";
             }
         }
 
@@ -78,7 +79,8 @@ namespace CourseWork
             tslLeft.Text = $"Left: {left}";
             tslSuccess.Text = $"Success: {succes}";
             lbPlayers.Items.Add(player.Nickname);
-            playerView.Update(player, false);
+            if(cbLive.Checked)
+                playerView.Update(player, false);
             
         }
 

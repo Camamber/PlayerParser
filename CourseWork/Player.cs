@@ -8,6 +8,7 @@ namespace CourseWork
 {
     public class Player
     {
+        
         public string Url { get; set; }
         public string Nickname { get; set; }
         public string Photo { get; set; }
