@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbPhoto = new System.Windows.Forms.PictureBox();
             this.lblNickname = new System.Windows.Forms.Label();
             this.lblDescName = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -43,18 +43,19 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblRole = new System.Windows.Forms.Label();
             this.lblEarnings = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pbPhoto
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Gainsboro;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 43);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 172);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pbPhoto.BackColor = System.Drawing.Color.Gainsboro;
+            this.pbPhoto.Location = new System.Drawing.Point(0, 43);
+            this.pbPhoto.Name = "pbPhoto";
+            this.pbPhoto.Size = new System.Drawing.Size(270, 172);
+            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPhoto.TabIndex = 0;
+            this.pbPhoto.TabStop = false;
             // 
             // lblNickname
             // 
@@ -63,7 +64,7 @@
             this.lblNickname.ForeColor = System.Drawing.Color.White;
             this.lblNickname.Location = new System.Drawing.Point(0, 0);
             this.lblNickname.Name = "lblNickname";
-            this.lblNickname.Size = new System.Drawing.Size(250, 42);
+            this.lblNickname.Size = new System.Drawing.Size(270, 42);
             this.lblNickname.TabIndex = 1;
             this.lblNickname.Text = "Nickname";
             this.lblNickname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -85,18 +86,18 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.lblEarnings, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblName, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblBirth, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblCountry, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblStatus, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblRole, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lblEarnings, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.lblDescEarnings, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.lblDescBirth, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblDescCountry, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblDescStatus, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblDescRole, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblDescName, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblRole, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lblBirth, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 219);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -107,7 +108,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(250, 158);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(270, 158);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // lblDescBirth
@@ -178,7 +179,7 @@
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblName.Location = new System.Drawing.Point(128, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(122, 26);
+            this.lblName.Size = new System.Drawing.Size(142, 26);
             this.lblName.TabIndex = 8;
             this.lblName.Text = "Empty";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -190,7 +191,7 @@
             this.lblBirth.Location = new System.Drawing.Point(128, 26);
             this.lblBirth.Margin = new System.Windows.Forms.Padding(0);
             this.lblBirth.Name = "lblBirth";
-            this.lblBirth.Size = new System.Drawing.Size(122, 27);
+            this.lblBirth.Size = new System.Drawing.Size(142, 27);
             this.lblBirth.TabIndex = 9;
             this.lblBirth.Text = "Empty";
             this.lblBirth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -201,7 +202,7 @@
             this.lblCountry.Location = new System.Drawing.Point(128, 53);
             this.lblCountry.Margin = new System.Windows.Forms.Padding(0);
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(122, 26);
+            this.lblCountry.Size = new System.Drawing.Size(142, 26);
             this.lblCountry.TabIndex = 10;
             this.lblCountry.Text = "Empty";
             this.lblCountry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -213,7 +214,7 @@
             this.lblStatus.Location = new System.Drawing.Point(128, 79);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(122, 28);
+            this.lblStatus.Size = new System.Drawing.Size(142, 25);
             this.lblStatus.TabIndex = 11;
             this.lblStatus.Text = "Empty";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -224,7 +225,7 @@
             this.lblRole.Location = new System.Drawing.Point(128, 104);
             this.lblRole.Margin = new System.Windows.Forms.Padding(0);
             this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(122, 28);
+            this.lblRole.Size = new System.Drawing.Size(142, 26);
             this.lblRole.TabIndex = 12;
             this.lblRole.Text = "Empty";
             this.lblRole.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -236,7 +237,7 @@
             this.lblEarnings.Location = new System.Drawing.Point(128, 130);
             this.lblEarnings.Margin = new System.Windows.Forms.Padding(0);
             this.lblEarnings.Name = "lblEarnings";
-            this.lblEarnings.Size = new System.Drawing.Size(122, 28);
+            this.lblEarnings.Size = new System.Drawing.Size(142, 28);
             this.lblEarnings.TabIndex = 13;
             this.lblEarnings.Text = "Empty";
             this.lblEarnings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -248,10 +249,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lblNickname);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbPhoto);
             this.Name = "PlayerView";
-            this.Size = new System.Drawing.Size(250, 380);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Size = new System.Drawing.Size(270, 380);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -259,7 +260,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbPhoto;
         private System.Windows.Forms.Label lblNickname;
         private System.Windows.Forms.Label lblDescName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

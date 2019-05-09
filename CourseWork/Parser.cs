@@ -34,12 +34,13 @@ namespace CourseWork
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
+
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument htmlDoc = web.Load(links[i]);
                 Player player = new Player();
                 player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText;
-                player.Photo = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value;
-                     
+                player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
+
                 var infoDescription = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-description')]");
                 foreach(var description in infoDescription)
                 {
@@ -81,6 +82,11 @@ namespace CourseWork
         public void Join()
         {
             thread.Join();
+        }
+
+        private string GetFullUrl(string baseUrl, string path)
+        {         
+            return new Uri(new Uri(baseUrl), path).ToString();
         }
     }
 }
