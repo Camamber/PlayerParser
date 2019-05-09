@@ -36,7 +36,7 @@
             this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tspbProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.tslSuccess = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslError = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslLeft = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslThreads = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -115,7 +115,7 @@
             this.tslStatus,
             this.tspbProgress,
             this.tslSuccess,
-            this.toolStripStatusLabel3,
+            this.tslError,
             this.tslLeft,
             this.tslThreads});
             this.statusStrip1.Location = new System.Drawing.Point(0, 484);
@@ -147,14 +147,14 @@
             this.tslSuccess.Text = "Success: 0";
             this.tslSuccess.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStripStatusLabel3
+            // tslError
             // 
-            this.toolStripStatusLabel3.AutoSize = false;
-            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(70, 17);
-            this.toolStripStatusLabel3.Text = "Error: 0";
-            this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tslError.AutoSize = false;
+            this.tslError.ForeColor = System.Drawing.Color.Red;
+            this.tslError.Name = "tslError";
+            this.tslError.Size = new System.Drawing.Size(70, 17);
+            this.tslError.Text = "Error: 0";
+            this.tslError.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tslLeft
             // 
@@ -382,7 +382,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tslStatus;
         private System.Windows.Forms.ToolStripProgressBar tspbProgress;
         private System.Windows.Forms.ToolStripStatusLabel tslSuccess;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel tslError;
         private System.Windows.Forms.ToolStripStatusLabel tslLeft;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnParse;

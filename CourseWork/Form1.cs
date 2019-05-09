@@ -15,7 +15,7 @@ namespace CourseWork
     {
         ParseHelper parserHelper;
         PlayerView playerView;
-        int left, succes;
+        int left, succes, error;
         public Form1()
         {
             InitializeComponent();
@@ -50,7 +50,9 @@ namespace CourseWork
                 tspbProgress.Maximum = parserHelper.PlayersLinksCount;
                 left = parserHelper.PlayersLinksCount;
                 succes = 0;
+                error = 0;
                 tslLeft.Text = $"Left: {left}";
+                tslError.Text = $"Error: {error}";
                 tslSuccess.Text = $"Success: {succes}";
                 numStep.Maximum = numThreads.Maximum = parserHelper.PlayersLinksCount;
                 panelParse.Enabled = true;
@@ -86,8 +88,13 @@ namespace CourseWork
             
         }
 
-        private void Parser_OnPlayerProcessed(Player player)
+        private void Parser_OnPlayerProcessed(Player player, bool error)
         {
+            if (!error)
+                succes++;
+            else
+                this.error++;
+                
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action<Player>((p) => {

@@ -16,7 +16,7 @@ namespace CourseWork
         List<string> links;
         List<Player> players;
 
-        public delegate void OnPlayerProcessedHandler(Player p);
+        public delegate void OnPlayerProcessedHandler(Player player, bool error);
         public event OnPlayerProcessedHandler OnPlayerProcessed;
 
         Object lockMe = new Object();
@@ -107,10 +107,10 @@ namespace CourseWork
             return players.Find(p => p.Nickname == nickname);
         }
 
-        private void Player_OnPlayerParsed(Player player)
+        private void Player_OnPlayerParsed(Player player, bool error)
         {
             players.Add(player);
-            OnPlayerProcessed(player);
+            OnPlayerProcessed(player,error);
         }
 
         public int PlayersLinksCount

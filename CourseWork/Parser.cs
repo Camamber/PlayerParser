@@ -17,7 +17,7 @@ namespace CourseWork
         Thread thread;
         int start, end;
 
-        public delegate void OnPlayerParsedHandler(Player p);
+        public delegate void OnPlayerParsedHandler(Player player, bool error);
         public event OnPlayerParsedHandler OnPlayerParsed;
 
         public Parser(List<string> playersLinks, int start = 0, int end = 0)
@@ -37,44 +37,52 @@ namespace CourseWork
         {
             for (int i = start; i < end; i++)
             {
+                
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument htmlDoc = web.Load(links[i]);
                 Player player = new Player() { Url = links[i] };
-                player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
-                player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
-
-                var infoDescription = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-description')]");
-                foreach(var description in infoDescription)
+                try
                 {
-                    switch(description.InnerText)
+                    player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
+                    player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
+
+                    var infoDescription = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-description')]");
+                    foreach (var description in infoDescription)
                     {
-                        case "Name:":
-                            player.Name = description.ParentNode.ChildNodes[3].InnerText;
-                            break;
-                        case "Romanized Name:":
-                            player.Name = description.ParentNode.ChildNodes[3].InnerText;
-                            break;
-                        case "Birth:":
-                            string tmp = description.ParentNode.ChildNodes[3].InnerText;
-                            player.Birth = DateTime.Parse(tmp.Remove(tmp.IndexOf("(")));
-                            break;
-                        case "Country:":
-                            player.Country = description.ParentNode.ChildNodes[3].SelectSingleNode("./a").InnerText;
-                            break;
-                        case "Status:":
-                            player.Status = description.ParentNode.ChildNodes[3].InnerText;
-                            break;
-                        case "Role(s):":
-                            player.Role = description.ParentNode.ChildNodes[3].FirstChild.InnerText;
-                            break;
-                        case "Approx. Total Earnings:":
-                            player.TotalEarnings = description.ParentNode.ChildNodes[3].InnerText;
-                            break;
+                        switch (description.InnerText)
+                        {
+                            case "Name:":
+                                player.Name = description.ParentNode.ChildNodes[3].InnerText;
+                                break;
+                            case "Romanized Name:":
+                                player.Name = description.ParentNode.ChildNodes[3].InnerText;
+                                break;
+                            case "Birth:":
+                                string tmp = description.ParentNode.ChildNodes[3].InnerText;
+                                player.Birth = DateTime.Parse(tmp.Remove(tmp.IndexOf("(")));
+                                break;
+                            case "Country:":
+                                player.Country = description.ParentNode.ChildNodes[3].SelectSingleNode("./a").InnerText;
+                                break;
+                            case "Status:":
+                                player.Status = description.ParentNode.ChildNodes[3].InnerText;
+                                break;
+                            case "Role(s):":
+                                player.Role = description.ParentNode.ChildNodes[3].FirstChild.InnerText;
+                                break;
+                            case "Approx. Total Earnings:":
+                                player.TotalEarnings = description.ParentNode.ChildNodes[3].InnerText;
+                                break;
+                        }
                     }
+                    OnPlayerParsed(player, false);
                 }
-                OnPlayerParsed(player);
+                catch
+                {
+                    OnPlayerParsed(player, true);
+                }
             }
         }
 
