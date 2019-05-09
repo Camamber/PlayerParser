@@ -28,6 +28,11 @@ namespace CourseWork
             thread = new Thread(GetPlayer);
         }
 
+        private string GetFullUrl(string baseUrl, string path)
+        {
+            return new Uri(new Uri(baseUrl), path).ToString();
+        }
+
         private void GetPlayer()
         {
             for (int i = start; i < end; i++)
@@ -38,7 +43,7 @@ namespace CourseWork
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument htmlDoc = web.Load(links[i]);
                 Player player = new Player();
-                player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText;
+                player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
                 player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
 
                 var infoDescription = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-description')]");
@@ -82,11 +87,6 @@ namespace CourseWork
         public void Join()
         {
             thread.Join();
-        }
-
-        private string GetFullUrl(string baseUrl, string path)
-        {         
-            return new Uri(new Uri(baseUrl), path).ToString();
         }
     }
 }

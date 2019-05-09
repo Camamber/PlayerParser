@@ -10,9 +10,6 @@ using System.Diagnostics;
 
 namespace CourseWork
 {
-    enum ParallelMethod { Threads, ParallelFor}
-
-
     class ParseHelper
     {
         List<string> links;
@@ -22,12 +19,12 @@ namespace CourseWork
         public event OnPlayerProcessedHandler OnPlayerProcessed;
 
         Object lockMe = new Object();
-        public ParseHelper(List<string> playersLinks, ParallelMethod method)
+        public ParseHelper(List<string> playersLinks)
         {
 
         }
 
-        public ParseHelper(string playersListUrl, ParallelMethod method)
+        public ParseHelper(string playersListUrl)
         {
             if (String.IsNullOrEmpty(playersListUrl))
                 throw new NullReferenceException("`playersListUrl` shouldn't be empty");
@@ -48,26 +45,14 @@ namespace CourseWork
             if (tbody != null && tbody.ChildNodes.Count > 1)
             {
                 var trs = tbody.SelectNodes("//tr");
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-
-                //for (int i = 1; i < trs.Count; i++)
-                //{
-                //    string link = trs[i].ChildNodes[3].FirstChild.Attributes["href"].Value;
-                //    ls.Add(String.Format(@"{0}://{1}{2}", url.Scheme, url.Authority, link));
-                //}
-
                 ParallelLoopResult result = Parallel.For(1, trs.Count, (i, s) =>
                 {
-                   
                     string link = trs[i].ChildNodes[3].FirstChild.Attributes["href"].Value;
                     lock (lockMe)
                     {
                         ls.Add(String.Format(@"{0}://{1}{2}", url.Scheme, url.Authority, link));
                     }
                 });
-
-                sw.Stop();
             }
             else
             {
@@ -75,33 +60,33 @@ namespace CourseWork
             }
             return ls;
         }
-
-        public string[] PlayersLinks
-        {
-            get{ return links.ToArray(); }
-        }
-        public int PlayersLinksCount
-        {
-            get { return links.Count; }
-        }
         
         public void Parse()
         {
             players = new List<Player>();
-            int count = 1;
-            for(int i = 0; i < 1; i+= count)
+            int count = 3;
+            for(int i = 0; i < 6; i+= count)
             {
-                Parser p = new Parser(links, i, i + count > links.Count ? links.Count : i + count);
-                p.OnPlayerParsed += Player_OnPlayerParsed;
-                p.Start();
-                //p.Join();
+                Parser parser = new Parser(links, i, i + count > links.Count ? links.Count : i + count);
+                parser.OnPlayerParsed += Player_OnPlayerParsed;
+                parser.Start();
             }        
         }
 
-        private void Player_OnPlayerParsed(Player p)
+        public Player GetPlayerByNickname(string nickname)
         {
-            players.Add(p);         
-            OnPlayerProcessed(p);
+            return players.Find(p => p.Nickname == nickname);
+        }
+
+        private void Player_OnPlayerParsed(Player player)
+        {
+            players.Add(player);
+            OnPlayerProcessed(player);
+        }
+
+        public int PlayersLinksCount
+        {
+            get { return links.Count; }
         }
     }
 }

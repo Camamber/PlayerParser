@@ -12,7 +12,7 @@ namespace CourseWork
 {
     public partial class Form1 : Form
     {
-        ParseHelper parser;
+        ParseHelper parserHelper;
         PlayerView playerView;
         int left, succes;
         public Form1()
@@ -26,19 +26,18 @@ namespace CourseWork
             tableLayoutPanel1.Controls.Add(playerView, 1, 0);
         }
 
-        private void btnParse_Click(object sender, EventArgs e)
+        private void btnRetrievePlayers_Click(object sender, EventArgs e)
         {
             //https://liquipedia.net/dota2/Players_(all)
             try
             {
-                parser = new ParseHelper(tbUrl.Text, ParallelMethod.Threads);
-                parser.OnPlayerProcessed += Parser_OnPlayerProcessed; ;
-                tspbProgress.Maximum = parser.PlayersLinksCount;
-                left = parser.PlayersLinksCount;
+                parserHelper = new ParseHelper(tbUrl.Text);
+                parserHelper.OnPlayerProcessed += Parser_OnPlayerProcessed; ;
+                tspbProgress.Maximum = parserHelper.PlayersLinksCount;
+                left = parserHelper.PlayersLinksCount;
                 succes = 0;
                 tslLeft.Text = $"Left: {left}";
                 tslSuccess.Text = $"Success: {succes}";
-
             }
             catch (NullReferenceException ex)
             {
@@ -52,7 +51,7 @@ namespace CourseWork
             left--; succes++;
             tslLeft.Text = $"Left: {left}";
             tslSuccess.Text = $"Success: {succes}";
-            lbPlayers.Items.Add(player.Name);
+            lbPlayers.Items.Add(player.Nickname);
             playerView.Update(player);
             
         }
@@ -64,7 +63,6 @@ namespace CourseWork
                 this.Invoke(new Action<Player>((p) => {
                     RecievePlayer(p);
                 }), player);
-                
             }
             else
             {
@@ -72,9 +70,14 @@ namespace CourseWork
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void lbPlayers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            parser.Parse();
+            playerView.Update(parserHelper.GetPlayerByNickname(lbPlayers.SelectedItem.ToString()));
+        }
+
+        private void btnParse_Click(object sender, EventArgs e)
+        {
+            parserHelper.Parse();
         }
     }
 }

@@ -30,7 +30,7 @@
         {
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.lblUrl = new System.Windows.Forms.Label();
-            this.btnParse = new System.Windows.Forms.Button();
+            this.btnRetrievePlayers = new System.Windows.Forms.Button();
             this.lbPlayers = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -38,8 +38,8 @@
             this.tslSuccess = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslLeft = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnParse = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -65,18 +65,18 @@
             this.lblUrl.TabIndex = 1;
             this.lblUrl.Text = "URL:";
             // 
-            // btnParse
+            // btnRetrievePlayers
             // 
-            this.btnParse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnParse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnParse.Location = new System.Drawing.Point(415, 5);
-            this.btnParse.Name = "btnParse";
-            this.btnParse.Size = new System.Drawing.Size(75, 30);
-            this.btnParse.TabIndex = 2;
-            this.btnParse.Text = "Parse";
-            this.btnParse.UseVisualStyleBackColor = true;
-            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
+            this.btnRetrievePlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRetrievePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRetrievePlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRetrievePlayers.Location = new System.Drawing.Point(415, 5);
+            this.btnRetrievePlayers.Name = "btnRetrievePlayers";
+            this.btnRetrievePlayers.Size = new System.Drawing.Size(75, 40);
+            this.btnRetrievePlayers.TabIndex = 2;
+            this.btnRetrievePlayers.Text = "Retrieve Players";
+            this.btnRetrievePlayers.UseVisualStyleBackColor = true;
+            this.btnRetrievePlayers.Click += new System.EventHandler(this.btnRetrievePlayers_Click);
             // 
             // lbPlayers
             // 
@@ -84,8 +84,9 @@
             this.lbPlayers.FormattingEnabled = true;
             this.lbPlayers.Location = new System.Drawing.Point(3, 3);
             this.lbPlayers.Name = "lbPlayers";
-            this.lbPlayers.Size = new System.Drawing.Size(208, 385);
+            this.lbPlayers.Size = new System.Drawing.Size(208, 388);
             this.lbPlayers.TabIndex = 3;
+            this.lbPlayers.SelectedIndexChanged += new System.EventHandler(this.lbPlayers_SelectedIndexChanged);
             // 
             // statusStrip1
             // 
@@ -95,7 +96,7 @@
             this.tslSuccess,
             this.toolStripStatusLabel3,
             this.tslLeft});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 464);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 484);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(502, 22);
             this.statusStrip1.TabIndex = 4;
@@ -139,17 +140,6 @@
             this.tslLeft.Text = "Left: 100";
             this.tslLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(415, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -159,22 +149,35 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.79749F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.20251F));
             this.tableLayoutPanel1.Controls.Add(this.lbPlayers, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 70);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 87);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(502, 391);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(502, 394);
             this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // btnParse
+            // 
+            this.btnParse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnParse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnParse.Location = new System.Drawing.Point(415, 51);
+            this.btnParse.Name = "btnParse";
+            this.btnParse.Size = new System.Drawing.Size(75, 30);
+            this.btnParse.TabIndex = 7;
+            this.btnParse.Text = "Parse";
+            this.btnParse.UseVisualStyleBackColor = true;
+            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 486);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(502, 506);
             this.Controls.Add(this.btnParse);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.btnRetrievePlayers);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.tbUrl);
             this.Name = "Form1";
@@ -192,7 +195,7 @@
 
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.Label lblUrl;
-        private System.Windows.Forms.Button btnParse;
+        private System.Windows.Forms.Button btnRetrievePlayers;
         private System.Windows.Forms.ListBox lbPlayers;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -200,8 +203,8 @@
         private System.Windows.Forms.ToolStripStatusLabel tslSuccess;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel tslLeft;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnParse;
     }
 }
 
