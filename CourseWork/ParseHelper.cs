@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using System.IO;
 
 namespace CourseWork
 {
@@ -19,17 +20,14 @@ namespace CourseWork
         public event OnPlayerProcessedHandler OnPlayerProcessed;
 
         Object lockMe = new Object();
-        public ParseHelper(List<string> playersLinks)
+        public ParseHelper(string playersListFile)
         {
-
+            links.AddRange(File.ReadAllLines(playersListFile));
         }
 
-        public ParseHelper(string playersListUrl)
+        public ParseHelper(Uri playersListUrl)
         {
-            if (String.IsNullOrEmpty(playersListUrl))
-                throw new NullReferenceException("`playersListUrl` shouldn't be empty");
-
-            links = GetPlayersLinks(new Uri(playersListUrl));
+            links = GetPlayersLinks(playersListUrl);
         }
 
         private List<string> GetPlayersLinks(Uri url)

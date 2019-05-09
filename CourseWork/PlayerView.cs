@@ -19,19 +19,19 @@ namespace CourseWork
             InitializeComponent();
         }
 
-        public void Update(Player p)
+        public void Update(Player player, bool withPhoto = true)
         {
-            if (p != null)
+            if (player != null)
             {
-                lblNickname.Text = p.Nickname;
-                pbPhoto.Image = GetPhoto(p.Photo);
-                lblName.Text = p.Name;
+                lblNickname.Text = player.Nickname;
 
-                lblBirth.Text = p.Birth == new DateTime() ? "<Empty>" : p.Birth.ToString();
-                lblCountry.Text = p.Country;
-                lblStatus.Text = p.Status;
-                lblRole.Text = p.Role;
-                lblEarnings.Text = p.TotalEarnings;
+                pbPhoto.Image = withPhoto?GetPhoto(player.Photo): new Bitmap(Properties.Resources.post2); ;
+                lblName.Text = player.Name;
+                lblBirth.Text = player.Birth == new DateTime() ? "<Empty>" : player.Birth.ToString();
+                lblCountry.Text = player.Country;
+                lblStatus.Text = player.Status;
+                lblRole.Text = player.Role;
+                lblEarnings.Text = player.TotalEarnings;
             }
         }
 
