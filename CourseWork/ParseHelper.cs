@@ -21,8 +21,8 @@ namespace CourseWork
 
         Object lockMe = new Object();
         public ParseHelper(string playersListFile)
-        {
-            links.AddRange(File.ReadAllLines(playersListFile));
+        {   
+            links = new List<string>(File.ReadAllLines(playersListFile));
         }
 
         public ParseHelper(Uri playersListUrl)

@@ -29,7 +29,7 @@ namespace CourseWork
 
                 pbPhoto.Image = withPhoto?GetPhoto(player.Photo): new Bitmap(Properties.Resources.post2); ;
                 lblName.Text = player.Name;
-                lblBirth.Text = player.Birth == new DateTime() ? "<Empty>" : player.Birth.ToString();
+                lblBirth.Text = player.Birth == new DateTime() ? "":player.Birth.ToString();
                 lblCountry.Text = player.Country;
                 lblStatus.Text = player.Status;
                 lblRole.Text = player.Role;

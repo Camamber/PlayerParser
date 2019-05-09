@@ -46,22 +46,27 @@ namespace CourseWork
                     parserHelper = new ParseHelper(tbUrl.Text);
                 else
                     parserHelper = new ParseHelper(new Uri(tbUrl.Text));
-                parserHelper.OnPlayerProcessed += Parser_OnPlayerProcessed; ;
+                parserHelper.OnPlayerProcessed += Parser_OnPlayerProcessed;
                 tspbProgress.Maximum = parserHelper.PlayersLinksCount;
                 left = parserHelper.PlayersLinksCount;
                 succes = 0;
                 tslLeft.Text = $"Left: {left}";
                 tslSuccess.Text = $"Success: {succes}";
+                btnParse.Enabled = true;
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
+                btnParse.Enabled = false;
             }
         }
 
         private void btnParse_Click(object sender, EventArgs e)
         {
-            parserHelper.Parse();
+            if (parserHelper != null)
+            {
+                parserHelper.Parse();
+            }
         }
 
         private void RecievePlayer(Player player)
