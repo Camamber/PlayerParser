@@ -26,7 +26,8 @@ namespace CourseWork
                 lblNickname.Text = p.Nickname;
                 pbPhoto.Image = GetPhoto(p.Photo);
                 lblName.Text = p.Name;
-                lblBirth.Text = p.Birth.ToString();
+
+                lblBirth.Text = p.Birth == new DateTime() ? "<Empty>" : p.Birth.ToString();
                 lblCountry.Text = p.Country;
                 lblStatus.Text = p.Status;
                 lblRole.Text = p.Role;
