@@ -88,8 +88,6 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.lblName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblBirth, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblCountry, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblStatus, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblRole, 1, 4);
@@ -100,6 +98,8 @@
             this.tableLayoutPanel1.Controls.Add(this.lblDescStatus, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lblDescRole, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.lblDescName, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblBirth, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblName, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 219);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";

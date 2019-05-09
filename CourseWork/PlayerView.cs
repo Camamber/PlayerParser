@@ -49,7 +49,8 @@ namespace CourseWork
 
         private void lblNickname_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(playerUrl);
+            if(playerUrl!=null  && playerUrl != "")
+                System.Diagnostics.Process.Start(playerUrl);
         }
     }
 }
