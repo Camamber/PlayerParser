@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseWork
 {
-    class Player
+    public class Player
     {
         public string Nickname { get; set; }
         public string Photo { get; set; }

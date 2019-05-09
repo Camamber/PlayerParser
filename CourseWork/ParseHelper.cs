@@ -88,8 +88,8 @@ namespace CourseWork
         public void Parse()
         {
             players = new List<Player>();
-            int count = 10;
-            for(int i = 0; i < 50; i+= count)
+            int count = 1;
+            for(int i = 0; i < 1; i+= count)
             {
                 Parser p = new Parser(links, i, i + count > links.Count ? links.Count : i + count);
                 p.OnPlayerParsed += Player_OnPlayerParsed;
@@ -100,7 +100,7 @@ namespace CourseWork
 
         private void Player_OnPlayerParsed(Player p)
         {
-            players.Add(p);
+            players.Add(p);         
             OnPlayerProcessed(p);
         }
     }

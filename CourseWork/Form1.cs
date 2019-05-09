@@ -13,6 +13,7 @@ namespace CourseWork
     public partial class Form1 : Form
     {
         ParseHelper parser;
+        PlayerView playerView;
         int left, succes;
         public Form1()
         {
@@ -21,7 +22,7 @@ namespace CourseWork
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            PlayerView playerView = new PlayerView();
+            playerView = new PlayerView();
             tableLayoutPanel1.Controls.Add(playerView, 1, 0);
         }
 
@@ -52,6 +53,7 @@ namespace CourseWork
             tslLeft.Text = $"Left: {left}";
             tslSuccess.Text = $"Success: {succes}";
             lbPlayers.Items.Add(player.Name);
+            playerView.Update(player);
             
         }
 
