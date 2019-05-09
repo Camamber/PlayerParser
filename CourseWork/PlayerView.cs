@@ -29,7 +29,7 @@ namespace CourseWork
                 lblBirth.Text = p.Birth.ToString();
                 lblCountry.Text = p.Country;
                 lblStatus.Text = p.Status;
-                lblRole.Text = p.Status;
+                lblRole.Text = p.Role;
                 lblEarnings.Text = p.TotalEarnings;
             }
         }
