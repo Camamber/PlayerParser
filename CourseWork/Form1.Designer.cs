@@ -33,7 +33,7 @@
             this.btnRetrievePlayers = new System.Windows.Forms.Button();
             this.lbPlayers = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tspbProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.tslSuccess = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -112,7 +112,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
+            this.tslStatus,
             this.tspbProgress,
             this.tslSuccess,
             this.toolStripStatusLabel3,
@@ -124,13 +124,13 @@
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // tslStatus
             // 
-            this.toolStripStatusLabel1.AutoSize = false;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(100, 17);
-            this.toolStripStatusLabel1.Text = "Status: Parsing";
-            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tslStatus.AutoSize = false;
+            this.tslStatus.Name = "tslStatus";
+            this.tslStatus.Size = new System.Drawing.Size(100, 17);
+            this.tslStatus.Text = "Status: None";
+            this.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tspbProgress
             // 
@@ -141,32 +141,36 @@
             // tslSuccess
             // 
             this.tslSuccess.AutoSize = false;
+            this.tslSuccess.ForeColor = System.Drawing.Color.Green;
             this.tslSuccess.Name = "tslSuccess";
             this.tslSuccess.Size = new System.Drawing.Size(80, 17);
-            this.tslSuccess.Text = "Success: 100";
+            this.tslSuccess.Text = "Success: 0";
             this.tslSuccess.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.AutoSize = false;
+            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(80, 17);
-            this.toolStripStatusLabel3.Text = "Error: 100";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(70, 17);
+            this.toolStripStatusLabel3.Text = "Error: 0";
             this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tslLeft
             // 
             this.tslLeft.AutoSize = false;
+            this.tslLeft.ForeColor = System.Drawing.Color.Blue;
             this.tslLeft.Name = "tslLeft";
-            this.tslLeft.Size = new System.Drawing.Size(80, 17);
-            this.tslLeft.Text = "Left: 100";
+            this.tslLeft.Size = new System.Drawing.Size(70, 17);
+            this.tslLeft.Text = "Left: 0";
             this.tslLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tslThreads
             // 
+            this.tslThreads.ForeColor = System.Drawing.Color.Indigo;
             this.tslThreads.Name = "tslThreads";
-            this.tslThreads.Size = new System.Drawing.Size(73, 17);
-            this.tslThreads.Text = "Threads: 100";
+            this.tslThreads.Size = new System.Drawing.Size(61, 17);
+            this.tslThreads.Text = "Threads: 0";
             // 
             // tableLayoutPanel1
             // 
@@ -219,7 +223,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(192, 15);
+            this.label1.Location = new System.Drawing.Point(191, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 20);
             this.label1.TabIndex = 11;
@@ -255,10 +259,11 @@
             // 
             // slideSwitch
             // 
-            this.slideSwitch.Location = new System.Drawing.Point(178, -5);
+            this.slideSwitch.BackColor = System.Drawing.SystemColors.Control;
+            this.slideSwitch.Location = new System.Drawing.Point(172, -4);
             this.slideSwitch.Maximum = 1;
             this.slideSwitch.Name = "slideSwitch";
-            this.slideSwitch.Size = new System.Drawing.Size(104, 45);
+            this.slideSwitch.Size = new System.Drawing.Size(112, 45);
             this.slideSwitch.TabIndex = 16;
             this.slideSwitch.Scroll += new System.EventHandler(this.slideSwitch_Scroll);
             // 
@@ -311,9 +316,9 @@
             // 
             // panelParse
             // 
+            this.panelParse.Controls.Add(this.label1);
             this.panelParse.Controls.Add(this.panelStep);
             this.panelParse.Controls.Add(this.btnParse);
-            this.panelParse.Controls.Add(this.label1);
             this.panelParse.Controls.Add(this.panelThread);
             this.panelParse.Controls.Add(this.slideSwitch);
             this.panelParse.Enabled = false;
@@ -374,7 +379,7 @@
         private System.Windows.Forms.Button btnRetrievePlayers;
         private System.Windows.Forms.ListBox lbPlayers;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tslStatus;
         private System.Windows.Forms.ToolStripProgressBar tspbProgress;
         private System.Windows.Forms.ToolStripStatusLabel tslSuccess;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;

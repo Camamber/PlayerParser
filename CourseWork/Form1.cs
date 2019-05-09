@@ -59,6 +59,7 @@ namespace CourseWork
             {
                 MessageBox.Show(ex.Message);
                 panelParse.Enabled = false;
+                tslStatus.Text = "Status: Error";
             }
         }
 
@@ -69,6 +70,7 @@ namespace CourseWork
             {
                 parserHelper.Parse(slideSwitch.Value == 0 ? (int)numStep.Value : (int)numThreads.Value, slideSwitch.Value == 0);
                 tslThreads.Text = $"Threads:  { (slideSwitch.Value == 0 ? Math.Ceiling(parserHelper.PlayersLinksCount/ numStep.Value).ToString() : numThreads.Value.ToString())}";
+                tslStatus.Text = "Status: Parsing";
             }
         }
 
