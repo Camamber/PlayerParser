@@ -59,10 +59,19 @@
     <Compile Include="ParseHelper.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PlayerView.Designer.cs">
+      <DependentUpon>PlayerView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerView.resx">
+      <DependentUpon>PlayerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -39,15 +39,19 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslLeft = new System.Windows.Forms.ToolStripStatusLabel();
             this.button1 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbUrl
             // 
+            this.tbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbUrl.Location = new System.Drawing.Point(58, 9);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(561, 23);
+            this.tbUrl.Size = new System.Drawing.Size(296, 23);
             this.tbUrl.TabIndex = 0;
             this.tbUrl.Text = "https://liquipedia.net/dota2/Players_(all)";
             // 
@@ -66,7 +70,7 @@
             this.btnParse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnParse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnParse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnParse.Location = new System.Drawing.Point(625, 5);
+            this.btnParse.Location = new System.Drawing.Point(362, 5);
             this.btnParse.Name = "btnParse";
             this.btnParse.Size = new System.Drawing.Size(75, 30);
             this.btnParse.TabIndex = 2;
@@ -76,10 +80,11 @@
             // 
             // lbPlayers
             // 
+            this.lbPlayers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbPlayers.FormattingEnabled = true;
-            this.lbPlayers.Location = new System.Drawing.Point(15, 64);
+            this.lbPlayers.Location = new System.Drawing.Point(3, 3);
             this.lbPlayers.Name = "lbPlayers";
-            this.lbPlayers.Size = new System.Drawing.Size(182, 251);
+            this.lbPlayers.Size = new System.Drawing.Size(182, 390);
             this.lbPlayers.TabIndex = 3;
             // 
             // statusStrip1
@@ -90,9 +95,9 @@
             this.tslSuccess,
             this.toolStripStatusLabel3,
             this.tslLeft});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 318);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 469);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(712, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(449, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -136,7 +141,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(622, 116);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(362, 41);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -144,14 +150,30 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.88377F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.11623F));
+            this.tableLayoutPanel1.Controls.Add(this.lbPlayers, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 70);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(449, 396);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 340);
+            this.ClientSize = new System.Drawing.Size(449, 491);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.lbPlayers);
             this.Controls.Add(this.btnParse);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.tbUrl);
@@ -160,6 +182,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,6 +201,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel tslLeft;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 

@@ -21,6 +21,8 @@ namespace CourseWork
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            PlayerView playerView = new PlayerView();
+            tableLayoutPanel1.Controls.Add(playerView, 1, 0);
         }
 
         private void btnParse_Click(object sender, EventArgs e)
