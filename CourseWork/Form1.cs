@@ -52,20 +52,22 @@ namespace CourseWork
                 succes = 0;
                 tslLeft.Text = $"Left: {left}";
                 tslSuccess.Text = $"Success: {succes}";
-                btnParse.Enabled = true;
+                numStep.Maximum = numThreads.Maximum = parserHelper.PlayersLinksCount;
+                panelParse.Enabled = true;
             }
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
-                btnParse.Enabled = false;
+                panelParse.Enabled = false;
             }
         }
 
         private void btnParse_Click(object sender, EventArgs e)
         {
+            lbPlayers.Items.Clear();
             if (parserHelper != null)
             {
-                parserHelper.Parse();
+                parserHelper.Parse(slideSwitch.Value == 0 ? (int)numStep.Value : (int)numThreads.Value, slideSwitch.Value == 0);
             }
         }
 
@@ -97,6 +99,12 @@ namespace CourseWork
         private void tbUrl_TextChanged(object sender, EventArgs e)
         {
             btnBrowse.Visible = tbUrl.Text == "";
+        }
+
+        private void slideSwitch_Scroll(object sender, EventArgs e)
+        {
+            panelStep.Enabled = slideSwitch.Value == 0;
+            panelThread.Enabled = slideSwitch.Value == 1;
         }
 
         private void lbPlayers_SelectedIndexChanged(object sender, EventArgs e)

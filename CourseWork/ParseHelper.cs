@@ -58,19 +58,50 @@ namespace CourseWork
             }
             return ls;
         }
-        
-        public void Parse()
+
+        public void Parse(int divider, bool byStep)
         {
+            if (divider < 1)
+                throw new Exception("Cant step by 0 or divide by 0 threads");
+
             players = new List<Player>();
-            int count = 3;
-            for(int i = 0; i < 6; i+= count)
+            if (byStep)
             {
-                Parser parser = new Parser(links, i, i + count > links.Count ? links.Count : i + count);
-                parser.OnPlayerParsed += Player_OnPlayerParsed;
-                parser.Start();
-            }        
+                for (int i = 0; i < 6; i += divider)
+                {
+                    Parser parser = new Parser(links, i, i + divider > links.Count ? links.Count : i + divider);
+                    parser.OnPlayerParsed += Player_OnPlayerParsed;
+                    parser.Start();
+                }
+            }
+            else
+            {
+                int[] steps = GetSteps(6, divider);
+                int start = 0;
+                for (int i = 0; i < steps.Length; i++)
+                {
+                    Parser parser = new Parser(links, start, start + steps[i]);
+                    start += steps[i];
+                    parser.OnPlayerParsed += Player_OnPlayerParsed;
+                    parser.Start();
+                }
+            }
         }
 
+        private int[] GetSteps(int count, int threads)
+        {
+            int[] steps = new int[threads];
+            int i = 0;
+            while (count > 0)
+            {
+                steps[i++] += 1;
+                count--;
+                if (i == threads)
+                    i = 0;
+            }
+            return steps;
+        }
+           
         public Player GetPlayerByNickname(string nickname)
         {
             return players.Find(p => p.Nickname == nickname);

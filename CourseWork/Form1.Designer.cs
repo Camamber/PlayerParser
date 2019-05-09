@@ -42,8 +42,23 @@
             this.btnParse = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblThreads = new System.Windows.Forms.Label();
+            this.numThreads = new System.Windows.Forms.NumericUpDown();
+            this.slideSwitch = new System.Windows.Forms.TrackBar();
+            this.panelThread = new System.Windows.Forms.Panel();
+            this.panelStep = new System.Windows.Forms.Panel();
+            this.numStep = new System.Windows.Forms.NumericUpDown();
+            this.lblStep = new System.Windows.Forms.Label();
+            this.panelParse = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slideSwitch)).BeginInit();
+            this.panelThread.SuspendLayout();
+            this.panelStep.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStep)).BeginInit();
+            this.panelParse.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbUrl
@@ -53,7 +68,7 @@
             this.tbUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbUrl.Location = new System.Drawing.Point(58, 9);
             this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(349, 23);
+            this.tbUrl.Size = new System.Drawing.Size(353, 23);
             this.tbUrl.TabIndex = 0;
             this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
@@ -72,7 +87,7 @@
             this.btnRetrievePlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRetrievePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRetrievePlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRetrievePlayers.Location = new System.Drawing.Point(415, 5);
+            this.btnRetrievePlayers.Location = new System.Drawing.Point(419, 5);
             this.btnRetrievePlayers.Name = "btnRetrievePlayers";
             this.btnRetrievePlayers.Size = new System.Drawing.Size(75, 40);
             this.btnRetrievePlayers.TabIndex = 2;
@@ -86,7 +101,7 @@
             this.lbPlayers.FormattingEnabled = true;
             this.lbPlayers.Location = new System.Drawing.Point(3, 3);
             this.lbPlayers.Name = "lbPlayers";
-            this.lbPlayers.Size = new System.Drawing.Size(208, 388);
+            this.lbPlayers.Size = new System.Drawing.Size(210, 390);
             this.lbPlayers.TabIndex = 3;
             this.lbPlayers.SelectedIndexChanged += new System.EventHandler(this.lbPlayers_SelectedIndexChanged);
             // 
@@ -100,7 +115,7 @@
             this.tslLeft});
             this.statusStrip1.Location = new System.Drawing.Point(0, 484);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(502, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(506, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -151,20 +166,19 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.79749F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.20251F));
             this.tableLayoutPanel1.Controls.Add(this.lbPlayers, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 87);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 85);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(502, 394);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(506, 396);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // btnParse
             // 
             this.btnParse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParse.Enabled = false;
             this.btnParse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnParse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnParse.Location = new System.Drawing.Point(415, 51);
+            this.btnParse.Location = new System.Drawing.Point(416, 4);
             this.btnParse.Name = "btnParse";
             this.btnParse.Size = new System.Drawing.Size(75, 30);
             this.btnParse.TabIndex = 7;
@@ -181,7 +195,7 @@
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnBrowse.Location = new System.Drawing.Point(415, 5);
+            this.btnBrowse.Location = new System.Drawing.Point(419, 5);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 40);
             this.btnBrowse.TabIndex = 8;
@@ -189,24 +203,144 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(169, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 20);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Divide by:";
+            // 
+            // lblThreads
+            // 
+            this.lblThreads.AutoSize = true;
+            this.lblThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblThreads.Location = new System.Drawing.Point(6, 11);
+            this.lblThreads.Name = "lblThreads";
+            this.lblThreads.Size = new System.Drawing.Size(65, 17);
+            this.lblThreads.TabIndex = 12;
+            this.lblThreads.Text = "Threads:";
+            // 
+            // numThreads
+            // 
+            this.numThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numThreads.Location = new System.Drawing.Point(77, 9);
+            this.numThreads.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numThreads.Name = "numThreads";
+            this.numThreads.Size = new System.Drawing.Size(60, 23);
+            this.numThreads.TabIndex = 14;
+            this.numThreads.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // slideSwitch
+            // 
+            this.slideSwitch.Location = new System.Drawing.Point(155, -3);
+            this.slideSwitch.Maximum = 1;
+            this.slideSwitch.Name = "slideSwitch";
+            this.slideSwitch.Size = new System.Drawing.Size(104, 45);
+            this.slideSwitch.TabIndex = 16;
+            this.slideSwitch.Scroll += new System.EventHandler(this.slideSwitch_Scroll);
+            // 
+            // panelThread
+            // 
+            this.panelThread.Controls.Add(this.numThreads);
+            this.panelThread.Controls.Add(this.lblThreads);
+            this.panelThread.Enabled = false;
+            this.panelThread.Location = new System.Drawing.Point(265, 0);
+            this.panelThread.Name = "panelThread";
+            this.panelThread.Size = new System.Drawing.Size(140, 39);
+            this.panelThread.TabIndex = 17;
+            // 
+            // panelStep
+            // 
+            this.panelStep.Controls.Add(this.numStep);
+            this.panelStep.Controls.Add(this.lblStep);
+            this.panelStep.Location = new System.Drawing.Point(12, 0);
+            this.panelStep.Name = "panelStep";
+            this.panelStep.Size = new System.Drawing.Size(140, 39);
+            this.panelStep.TabIndex = 18;
+            // 
+            // numStep
+            // 
+            this.numStep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numStep.Location = new System.Drawing.Point(50, 9);
+            this.numStep.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numStep.Name = "numStep";
+            this.numStep.Size = new System.Drawing.Size(60, 23);
+            this.numStep.TabIndex = 14;
+            this.numStep.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // lblStep
+            // 
+            this.lblStep.AutoSize = true;
+            this.lblStep.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblStep.Location = new System.Drawing.Point(3, 11);
+            this.lblStep.Name = "lblStep";
+            this.lblStep.Size = new System.Drawing.Size(41, 17);
+            this.lblStep.TabIndex = 12;
+            this.lblStep.Text = "Step:";
+            // 
+            // panelParse
+            // 
+            this.panelParse.Controls.Add(this.panelStep);
+            this.panelParse.Controls.Add(this.btnParse);
+            this.panelParse.Controls.Add(this.label1);
+            this.panelParse.Controls.Add(this.panelThread);
+            this.panelParse.Controls.Add(this.slideSwitch);
+            this.panelParse.Enabled = false;
+            this.panelParse.Location = new System.Drawing.Point(3, 47);
+            this.panelParse.Margin = new System.Windows.Forms.Padding(0);
+            this.panelParse.Name = "panelParse";
+            this.panelParse.Size = new System.Drawing.Size(503, 39);
+            this.panelParse.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 506);
+            this.ClientSize = new System.Drawing.Size(506, 506);
             this.Controls.Add(this.btnBrowse);
-            this.Controls.Add(this.btnParse);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnRetrievePlayers);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.tbUrl);
+            this.Controls.Add(this.panelParse);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(522, 545);
+            this.MinimumSize = new System.Drawing.Size(522, 545);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numThreads)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slideSwitch)).EndInit();
+            this.panelThread.ResumeLayout(false);
+            this.panelThread.PerformLayout();
+            this.panelStep.ResumeLayout(false);
+            this.panelStep.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStep)).EndInit();
+            this.panelParse.ResumeLayout(false);
+            this.panelParse.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,6 +363,15 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblThreads;
+        private System.Windows.Forms.NumericUpDown numThreads;
+        private System.Windows.Forms.TrackBar slideSwitch;
+        private System.Windows.Forms.Panel panelThread;
+        private System.Windows.Forms.Panel panelStep;
+        private System.Windows.Forms.NumericUpDown numStep;
+        private System.Windows.Forms.Label lblStep;
+        private System.Windows.Forms.Panel panelParse;
     }
 }
 
