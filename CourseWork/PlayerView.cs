@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.IO;
 
 namespace CourseWork
 {
@@ -27,7 +25,7 @@ namespace CourseWork
             {
                 lblNickname.Text = player.Nickname;
 
-                pbPhoto.Image = withPhoto?GetPhoto(player.Photo): new Bitmap(Properties.Resources.post2); ;
+                pbPhoto.Image = withPhoto ? player.GetPhoto() : new Bitmap(Properties.Resources.post2);
                 lblName.Text = player.Name;
                 lblBirth.Text = player.Birth == new DateTime() ? "":player.Birth.ToString();
                 lblCountry.Text = player.Country;
@@ -35,16 +33,6 @@ namespace CourseWork
                 lblRole.Text = player.Role;
                 lblEarnings.Text = player.TotalEarnings;
             }
-        }
-
-        private Image GetPhoto(string url)
-        {
-            Image img;
-            using (WebClient wc = new WebClient())
-            {
-                img = Image.FromStream(new MemoryStream(wc.DownloadData(url)));
-            }
-            return img;
         }
 
         private void lblNickname_Click(object sender, EventArgs e)
