@@ -55,7 +55,6 @@
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(349, 23);
             this.tbUrl.TabIndex = 0;
-            this.tbUrl.Text = "https://liquipedia.net/dota2/Players_(all)";
             this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
             // lblUrl

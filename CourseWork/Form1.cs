@@ -23,6 +23,7 @@ namespace CourseWork
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            tbUrl.Text = @"https://liquipedia.net/dota2/Players_(all)";
             playerView = new PlayerView();
             tableLayoutPanel1.Controls.Add(playerView, 1, 0);
         }
@@ -90,10 +91,7 @@ namespace CourseWork
 
         private void tbUrl_TextChanged(object sender, EventArgs e)
         {
-            if (tbUrl.Text == "")
-            {
-                btnBrowse.Visible = true;
-            }
+            btnBrowse.Visible = tbUrl.Text == "";
         }
 
         private void lbPlayers_SelectedIndexChanged(object sender, EventArgs e)

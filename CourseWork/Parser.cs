@@ -39,10 +39,9 @@ namespace CourseWork
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
-
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument htmlDoc = web.Load(links[i]);
-                Player player = new Player();
+                Player player = new Player() { Url = links[i] };
                 player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
                 player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
 

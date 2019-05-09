@@ -14,6 +14,7 @@ namespace CourseWork
 {
     public partial class PlayerView : UserControl
     {
+        string playerUrl;
         public PlayerView()
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace CourseWork
 
         public void Update(Player player, bool withPhoto = true)
         {
+            playerUrl = player.Url;
             if (player != null)
             {
                 lblNickname.Text = player.Nickname;
@@ -43,6 +45,11 @@ namespace CourseWork
                 img = Image.FromStream(new MemoryStream(wc.DownloadData(url)));
             }
             return img;
+        }
+
+        private void lblNickname_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(playerUrl);
         }
     }
 }
