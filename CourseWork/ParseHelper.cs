@@ -74,36 +74,38 @@ namespace CourseWork
             string[] proxies = { "" };       
             if (File.Exists("proxies.txt"))
                 proxies = File.ReadAllLines("proxies.txt");
-            int j = 0;
+
+            int length, incer, j=0;
+            int[] steps = new int[1];
+            int start=0;
 
             if (byStep)
             {
-                for (int i = 0; i < 10; i += divider)
-                {
-                    Parser parser = new Parser(proxies[j++], links, i, i + divider > links.Count ? links.Count : i + divider);
-                    parser.OnPlayerParsed += Player_OnPlayerParsed;
-                    parser.OnParsed += Parser_OnParsed;
-                    parser.Start();
-                    parsers.Add(parser);
-
-                    if (j >= proxies.Length)
-                        j = 0;
-                }
+                length = links.Count;
+                incer = divider;
             }
             else
             {
-                int[] steps = GetSteps(6, divider);
-                int start = 0;
-                for (int i = 0; i < steps.Length; i++)
-                {
-                    Parser parser = new Parser(proxies[j], links, start, start + steps[i]);
-                    start += steps[i];
-                    parser.OnPlayerParsed += Player_OnPlayerParsed;
-                    parser.OnParsed += Parser_OnParsed;
-                    parser.Start();
-                    parsers.Add(parser);
-                }
+                steps = GetSteps(links.Count, divider);
+                length = steps.Length;
+                incer = 1;       
             }
+
+            for (int i = 0; i < length; i += incer)
+            {
+                Parser parser;
+                if (byStep)
+                    parser = new Parser(proxies[j++], links, i, i + divider > links.Count ? links.Count : i + divider);
+                else
+                    parser = new Parser(proxies[j], links, start, (start = start + steps[i]));
+                parser.OnPlayerParsed += Player_OnPlayerParsed;
+                parser.OnParsed += Parser_OnParsed;
+                parser.Start();
+                parsers.Add(parser);
+
+                if (j >= proxies.Length)
+                    j = 0;
+            } 
         }
 
         public void Abort()
