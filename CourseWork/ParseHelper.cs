@@ -97,7 +97,7 @@ namespace CourseWork
                 if (byStep)
                     parser = new Parser(proxies[j++], links, i, i + divider > links.Count ? links.Count : i + divider);
                 else
-                    parser = new Parser(proxies[j], links, start, (start = start + steps[i]));
+                    parser = new Parser(proxies[j++], links, start, (start = start + steps[i]));
                 parser.OnPlayerParsed += Player_OnPlayerParsed;
                 parser.OnParsed += Parser_OnParsed;
                 parser.Start();
