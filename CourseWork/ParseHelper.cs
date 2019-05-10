@@ -82,12 +82,12 @@ namespace CourseWork
 
             if (byStep)
             {
-                length = 100;
+                length = PlayersLinksCount;
                 incer = divider;
             }
             else
             {
-                steps = GetSteps(links.Count, divider);
+                steps = GetSteps(PlayersLinksCount, divider);
                 length = steps.Length;
                 incer = 1;       
             }
@@ -96,7 +96,7 @@ namespace CourseWork
             {
                 Parser parser;
                 if (byStep)
-                    parser = new Parser(proxies[j++], links, i, i + divider > links.Count ? links.Count : i + divider);
+                    parser = new Parser(proxies[j++], links, i, i + divider > PlayersLinksCount ? PlayersLinksCount : i + divider);
                 else
                     parser = new Parser(proxies[j++], links, start, (start = start + steps[i]));
                 parser.OnPlayerParsed += Player_OnPlayerParsed;
