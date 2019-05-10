@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace CourseWork
 {
@@ -81,7 +82,7 @@ namespace CourseWork
 
             if (byStep)
             {
-                length = links.Count;
+                length = 100;
                 incer = divider;
             }
             else
@@ -114,6 +115,11 @@ namespace CourseWork
             {
                 parser.Abort();
             }
+        }
+
+        public void Serialize(string file)
+        {
+            File.WriteAllText(file, JsonConvert.SerializeObject(players));
         }
 
         private int[] GetSteps(int count, int threads)
