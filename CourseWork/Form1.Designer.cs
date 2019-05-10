@@ -54,6 +54,10 @@
             this.panelParse = new System.Windows.Forms.Panel();
             this.cbLive = new System.Windows.Forms.CheckBox();
             this.btnAbort = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSerialize = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
@@ -62,6 +66,7 @@
             this.panelStep.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStep)).BeginInit();
             this.panelParse.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbUrl
@@ -104,9 +109,9 @@
             this.lbPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbPlayers.FormattingEnabled = true;
             this.lbPlayers.ItemHeight = 16;
-            this.lbPlayers.Location = new System.Drawing.Point(3, 3);
+            this.lbPlayers.Location = new System.Drawing.Point(0, 0);
             this.lbPlayers.Name = "lbPlayers";
-            this.lbPlayers.Size = new System.Drawing.Size(226, 390);
+            this.lbPlayers.Size = new System.Drawing.Size(226, 362);
             this.lbPlayers.TabIndex = 3;
             this.lbPlayers.SelectedIndexChanged += new System.EventHandler(this.lbPlayers_SelectedIndexChanged);
             // 
@@ -181,7 +186,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.79749F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.20251F));
-            this.tableLayoutPanel1.Controls.Add(this.lbPlayers, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 85);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -224,7 +229,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(191, 8);
+            this.label1.Location = new System.Drawing.Point(192, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 20);
             this.label1.TabIndex = 11;
@@ -262,10 +267,10 @@
             // slideSwitch
             // 
             this.slideSwitch.BackColor = System.Drawing.SystemColors.Control;
-            this.slideSwitch.Location = new System.Drawing.Point(172, -4);
+            this.slideSwitch.Location = new System.Drawing.Point(165, -4);
             this.slideSwitch.Maximum = 1;
             this.slideSwitch.Name = "slideSwitch";
-            this.slideSwitch.Size = new System.Drawing.Size(112, 45);
+            this.slideSwitch.Size = new System.Drawing.Size(128, 45);
             this.slideSwitch.TabIndex = 16;
             this.slideSwitch.Scroll += new System.EventHandler(this.slideSwitch_Scroll);
             // 
@@ -356,11 +361,42 @@
             this.btnAbort.Visible = false;
             this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbPlayers);
+            this.panel1.Controls.Add(this.btnSerialize);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(226, 390);
+            this.panel1.TabIndex = 21;
+            // 
+            // btnSerialize
+            // 
+            this.btnSerialize.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSerialize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSerialize.Location = new System.Drawing.Point(0, 362);
+            this.btnSerialize.Name = "btnSerialize";
+            this.btnSerialize.Size = new System.Drawing.Size(226, 28);
+            this.btnSerialize.TabIndex = 4;
+            this.btnSerialize.Text = "Save to JSON";
+            this.btnSerialize.UseVisualStyleBackColor = true;
+            this.btnSerialize.Click += new System.EventHandler(this.btnSerialize_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(547, 44);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(365, 43);
+            this.richTextBox1.TabIndex = 21;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(544, 506);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.cbLive);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -385,6 +421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numStep)).EndInit();
             this.panelParse.ResumeLayout(false);
             this.panelParse.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,6 +456,10 @@
         private System.Windows.Forms.ToolStripStatusLabel tslThreads;
         private System.Windows.Forms.CheckBox cbLive;
         private System.Windows.Forms.Button btnAbort;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnSerialize;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

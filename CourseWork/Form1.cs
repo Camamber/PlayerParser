@@ -88,36 +88,41 @@ namespace CourseWork
             }
         }
 
-        private void RecievePlayer(Player player)
+        private void RecievePlayer(Player player, bool error)
         {
             tspbProgress.Increment(1);
             left--;
+            if (error)
+            {
+                this.error++;
+            }
+            else
+            {               
+                succes++;              
+                lbPlayers.Items.Add(player.Nickname);
+                if (cbLive.Checked)
+                    playerView.Update(player, false);
+
+            }
             tslLeft.Text = $"Left: {left}";
             tslSuccess.Text = $"Success: {succes}";
-            lbPlayers.Items.Add(player.Nickname);
-            if (cbLive.Checked)
-                playerView.Update(player, false);
-
+            tslError.Text = $"Error: {this.error}";
         }
 
         private void Parser_OnPlayerProcessed(Player player, bool error)
         {
-            if (!error)
-                succes++;
-            else
-                this.error++;
-
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action<Player>((p) =>
+                this.Invoke(new Action<Player, bool>((p, e) =>
                 {
-                    RecievePlayer(p);
-                }), player);
+                    RecievePlayer(p, e);
+                }), player, error);
             }
             else
             {
-                RecievePlayer(player);
+                RecievePlayer(player, error);
             }
+
         }
 
         private void DoneParsing()
@@ -140,7 +145,7 @@ namespace CourseWork
             else
             {
                 DoneParsing();
-            }         
+            }            
         }
 
         private void tbUrl_TextChanged(object sender, EventArgs e)
@@ -156,6 +161,14 @@ namespace CourseWork
         private void numThreads_ValueChanged(object sender, EventArgs e)
         {
             tslThreads.Text = $"Threads:  {numThreads.Value.ToString()}";
+        }
+
+        private void btnSerialize_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && parserHelper != null)
+            {
+                parserHelper.Serialize(saveFileDialog1.FileName);
+            }
         }
 
         private void slideSwitch_Scroll(object sender, EventArgs e)

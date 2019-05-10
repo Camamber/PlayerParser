@@ -62,18 +62,16 @@ namespace CourseWork
 
         private void GetPlayer()
         {
-            for (int i = start; i < end; i++)
-            {                
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            //HtmlWeb web = new HtmlWeb();  
+            WebClient wc = new WebClient();
+            wc.Proxy = this.proxy;
 
-                HtmlWeb web = new HtmlWeb();
-                
+            for (int i = start; i < end; i++)
+            {                            
                 Player player = new Player() { Url = links[i] };
                 try
                 {
-                    WebClient wc = new WebClient();
-                    wc.Proxy = this.proxy;
-
                     HtmlDocument htmlDoc = new HtmlDocument();//web.Load(links[i]);
                     htmlDoc.LoadHtml(wc.DownloadString(links[i]));
                     player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
@@ -115,6 +113,7 @@ namespace CourseWork
                     OnPlayerParsed(player, true);
                 }
             }
+            wc.Dispose();
             OnParsed(this);
         }
 
@@ -130,7 +129,8 @@ namespace CourseWork
 
         public void Abort()
         {
-            thread.Abort();
+            if(thread.IsAlive)
+                thread.Abort();
             OnParsed(this);
         }
     }

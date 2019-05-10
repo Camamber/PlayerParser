@@ -1,6 +1,4 @@
   ## ToDo: 
-  * Code refactor
-  * Json serialize
-  * Elapsed Time 
+  * Protocole
   ## Epic:
   * Threads dashboard
