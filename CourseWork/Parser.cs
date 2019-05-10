@@ -15,7 +15,8 @@ namespace CourseWork
 
         List<string> links;
         Thread thread;
-        int id, start, end;
+        int start, end;
+        WebProxy proxy;
 
         public delegate void OnPlayerParsedHandler(Player player, bool error);
         public event OnPlayerParsedHandler OnPlayerParsed;
@@ -23,13 +24,37 @@ namespace CourseWork
         public delegate void OnParsedHandler(Parser parser);
         public event OnParsedHandler OnParsed;
 
-        public Parser(int id, List<string> playersLinks, int start = 0, int end = 0)
+        public Parser(string proxy, List<string> playersLinks, int start = 0, int end = 0)
         {
-            this.id = id;
+            this.proxy = CheckProxy(proxy);
             links = playersLinks;
             this.start = start;
             this.end = end > 0 ? end : playersLinks.Count;
             thread = new Thread(GetPlayer);
+        }
+
+        private WebProxy CheckProxy(string adress)
+        {
+            WebProxy proxy = new WebProxy(adress);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@"https://www.google.com");
+            request.Proxy = proxy;
+            request.Timeout = 10000;
+            request.Method = "HEAD";
+
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    if (response.StatusCode == HttpStatusCode.OK)
+                        return proxy;
+                    else
+                        return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private string GetFullUrl(string baseUrl, string path)
@@ -44,10 +69,15 @@ namespace CourseWork
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
                 HtmlWeb web = new HtmlWeb();
+                
                 Player player = new Player() { Url = links[i] };
                 try
                 {
-                    HtmlDocument htmlDoc = web.Load(links[i]);
+                    WebClient wc = new WebClient();
+                    wc.Proxy = this.proxy;
+
+                    HtmlDocument htmlDoc = new HtmlDocument();//web.Load(links[i]);
+                    htmlDoc.LoadHtml(wc.DownloadString(links[i]));
                     player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
                     player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
 
@@ -82,7 +112,7 @@ namespace CourseWork
                     }
                     OnPlayerParsed(player, false);
                 }
-                catch
+                catch(Exception ex)
                 {
                     OnPlayerParsed(player, true);
                 }
@@ -104,11 +134,6 @@ namespace CourseWork
         {
             thread.Abort();
             OnParsed(this);
-        }
-
-        public int Id
-        {
-            get { return id; }
         }
     }
 }

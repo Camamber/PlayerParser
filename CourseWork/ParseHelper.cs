@@ -70,16 +70,24 @@ namespace CourseWork
 
             players = new List<Player>();
             parsers = new List<Parser>();
-            int id = 0;
+
+            string[] proxies = { "" };       
+            if (File.Exists("proxies.txt"))
+                proxies = File.ReadAllLines("proxies.txt");
+            int j = 0;
+
             if (byStep)
             {
-                for (int i = 0; i < 20; i += divider)
+                for (int i = 0; i < 10; i += divider)
                 {
-                    Parser parser = new Parser(id++, links, i, i + divider > links.Count ? links.Count : i + divider);
+                    Parser parser = new Parser(proxies[j++], links, i, i + divider > links.Count ? links.Count : i + divider);
                     parser.OnPlayerParsed += Player_OnPlayerParsed;
                     parser.OnParsed += Parser_OnParsed;
                     parser.Start();
                     parsers.Add(parser);
+
+                    if (j >= proxies.Length)
+                        j = 0;
                 }
             }
             else
@@ -88,7 +96,7 @@ namespace CourseWork
                 int start = 0;
                 for (int i = 0; i < steps.Length; i++)
                 {
-                    Parser parser = new Parser(id++, links, start, start + steps[i]);
+                    Parser parser = new Parser(proxies[j], links, start, start + steps[i]);
                     start += steps[i];
                     parser.OnPlayerParsed += Player_OnPlayerParsed;
                     parser.OnParsed += Parser_OnParsed;
@@ -97,8 +105,6 @@ namespace CourseWork
                 }
             }
         }
-
-
 
         public void Abort()
         {

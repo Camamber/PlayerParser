@@ -91,7 +91,7 @@ namespace CourseWork
         private void RecievePlayer(Player player)
         {
             tspbProgress.Increment(1);
-            left--; succes++;
+            left--;
             tslLeft.Text = $"Left: {left}";
             tslSuccess.Text = $"Success: {succes}";
             lbPlayers.Items.Add(player.Nickname);
@@ -133,13 +133,14 @@ namespace CourseWork
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(() => { DoneParsing(); }));
+                this.Invoke(new Action(() => {
+                    DoneParsing();
+                }));
             }
             else
             {
                 DoneParsing();
-            }
-           
+            }         
         }
 
         private void tbUrl_TextChanged(object sender, EventArgs e)
@@ -155,7 +156,6 @@ namespace CourseWork
         private void numThreads_ValueChanged(object sender, EventArgs e)
         {
             tslThreads.Text = $"Threads:  {numThreads.Value.ToString()}";
-
         }
 
         private void slideSwitch_Scroll(object sender, EventArgs e)
