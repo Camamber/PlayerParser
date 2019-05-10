@@ -53,6 +53,7 @@
             this.lblStep = new System.Windows.Forms.Label();
             this.panelParse = new System.Windows.Forms.Panel();
             this.cbLive = new System.Windows.Forms.CheckBox();
+            this.btnAbort = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numThreads)).BeginInit();
@@ -170,7 +171,7 @@
             this.tslThreads.ForeColor = System.Drawing.Color.Indigo;
             this.tslThreads.Name = "tslThreads";
             this.tslThreads.Size = new System.Drawing.Size(61, 17);
-            this.tslThreads.Text = "Threads: 0";
+            this.tslThreads.Text = "Threads: 1";
             // 
             // tableLayoutPanel1
             // 
@@ -256,6 +257,7 @@
             0,
             0,
             0});
+            this.numThreads.ValueChanged += new System.EventHandler(this.numThreads_ValueChanged);
             // 
             // slideSwitch
             // 
@@ -303,6 +305,7 @@
             0,
             0,
             0});
+            this.numStep.ValueChanged += new System.EventHandler(this.numStep_ValueChanged);
             // 
             // lblStep
             // 
@@ -316,6 +319,7 @@
             // 
             // panelParse
             // 
+            this.panelParse.Controls.Add(this.btnAbort);
             this.panelParse.Controls.Add(this.label1);
             this.panelParse.Controls.Add(this.panelStep);
             this.panelParse.Controls.Add(this.btnParse);
@@ -337,6 +341,20 @@
             this.cbLive.TabIndex = 20;
             this.cbLive.Text = "Live preview";
             this.cbLive.UseVisualStyleBackColor = true;
+            // 
+            // btnAbort
+            // 
+            this.btnAbort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAbort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnAbort.Location = new System.Drawing.Point(454, 4);
+            this.btnAbort.Name = "btnAbort";
+            this.btnAbort.Size = new System.Drawing.Size(75, 30);
+            this.btnAbort.TabIndex = 19;
+            this.btnAbort.Text = "Abort";
+            this.btnAbort.UseVisualStyleBackColor = true;
+            this.btnAbort.Visible = false;
+            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
             // 
             // Form1
             // 
@@ -400,6 +418,7 @@
         private System.Windows.Forms.Panel panelParse;
         private System.Windows.Forms.ToolStripStatusLabel tslThreads;
         private System.Windows.Forms.CheckBox cbLive;
+        private System.Windows.Forms.Button btnAbort;
     }
 }
 

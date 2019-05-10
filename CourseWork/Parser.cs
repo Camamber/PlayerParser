@@ -15,13 +15,17 @@ namespace CourseWork
 
         List<string> links;
         Thread thread;
-        int start, end;
+        int id, start, end;
 
         public delegate void OnPlayerParsedHandler(Player player, bool error);
         public event OnPlayerParsedHandler OnPlayerParsed;
 
-        public Parser(List<string> playersLinks, int start = 0, int end = 0)
+        public delegate void OnParsedHandler(Parser parser);
+        public event OnParsedHandler OnParsed;
+
+        public Parser(int id, List<string> playersLinks, int start = 0, int end = 0)
         {
+            this.id = id;
             links = playersLinks;
             this.start = start;
             this.end = end > 0 ? end : playersLinks.Count;
@@ -36,15 +40,14 @@ namespace CourseWork
         private void GetPlayer()
         {
             for (int i = start; i < end; i++)
-            {
-                
+            {                
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
                 HtmlWeb web = new HtmlWeb();
-                HtmlDocument htmlDoc = web.Load(links[i]);
                 Player player = new Player() { Url = links[i] };
                 try
                 {
+                    HtmlDocument htmlDoc = web.Load(links[i]);
                     player.Nickname = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-header')]")[0].InnerText.Replace("[e][h] ", "");
                     player.Photo = GetFullUrl(links[i], htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-image')]")[0].SelectSingleNode(".//img").Attributes["src"].Value);
 
@@ -84,6 +87,7 @@ namespace CourseWork
                     OnPlayerParsed(player, true);
                 }
             }
+            OnParsed(this);
         }
 
         public void Start()
@@ -94,6 +98,17 @@ namespace CourseWork
         public void Join()
         {
             thread.Join();
+        }
+
+        public void Abort()
+        {
+            thread.Abort();
+            OnParsed(this);
+        }
+
+        public int Id
+        {
+            get { return id; }
         }
     }
 }

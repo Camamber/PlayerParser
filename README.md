@@ -1,5 +1,5 @@
   ## ToDo: 
-  * OnParsed
-  * List of threads 
-  ## Epic:
   * Proxy
+  * Elapsed Time 
+  ## Epic:
+  * Threads dashboard

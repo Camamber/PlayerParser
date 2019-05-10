@@ -15,9 +15,13 @@ namespace CourseWork
     {
         List<string> links;
         List<Player> players;
+        List<Parser> parsers;
 
         public delegate void OnPlayerProcessedHandler(Player player, bool error);
         public event OnPlayerProcessedHandler OnPlayerProcessed;
+
+        public delegate void OnProcessedHandler();
+        public event OnProcessedHandler OnProcessed;
 
         Object lockMe = new Object();
         public ParseHelper(string playersListFile)
@@ -65,13 +69,17 @@ namespace CourseWork
                 throw new Exception("Cant step by 0 or divide by 0 threads");
 
             players = new List<Player>();
+            parsers = new List<Parser>();
+            int id = 0;
             if (byStep)
             {
-                for (int i = 0; i < 6; i += divider)
+                for (int i = 0; i < 20; i += divider)
                 {
-                    Parser parser = new Parser(links, i, i + divider > links.Count ? links.Count : i + divider);
+                    Parser parser = new Parser(id++, links, i, i + divider > links.Count ? links.Count : i + divider);
                     parser.OnPlayerParsed += Player_OnPlayerParsed;
+                    parser.OnParsed += Parser_OnParsed;
                     parser.Start();
+                    parsers.Add(parser);
                 }
             }
             else
@@ -80,11 +88,23 @@ namespace CourseWork
                 int start = 0;
                 for (int i = 0; i < steps.Length; i++)
                 {
-                    Parser parser = new Parser(links, start, start + steps[i]);
+                    Parser parser = new Parser(id++, links, start, start + steps[i]);
                     start += steps[i];
                     parser.OnPlayerParsed += Player_OnPlayerParsed;
+                    parser.OnParsed += Parser_OnParsed;
                     parser.Start();
+                    parsers.Add(parser);
                 }
+            }
+        }
+
+
+
+        public void Abort()
+        {
+            foreach(Parser parser in parsers)
+            {
+                parser.Abort();
             }
         }
 
@@ -102,15 +122,22 @@ namespace CourseWork
             return steps;
         }
            
-        public Player GetPlayerByNickname(string nickname)
-        {
-            return players.Find(p => p.Nickname == nickname);
-        }
-
         private void Player_OnPlayerParsed(Player player, bool error)
         {
             players.Add(player);
             OnPlayerProcessed(player,error);
+        }
+
+        private void Parser_OnParsed(Parser parser)
+        {
+            parsers.Remove(parser);
+            if (parsers.Count == 0)
+                OnProcessed();
+
+        }
+        public Player GetPlayerByNickname(string nickname)
+        {
+            return players.Find(p => p.Nickname == nickname);
         }
 
         public int PlayersLinksCount

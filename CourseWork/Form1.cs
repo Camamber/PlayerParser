@@ -15,6 +15,7 @@ namespace CourseWork
     {
         ParseHelper parserHelper;
         PlayerView playerView;
+        bool aborted = false;
         int left, succes, error;
         public Form1()
         {
@@ -30,7 +31,7 @@ namespace CourseWork
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog()== DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 tbUrl.Text = openFileDialog1.FileName;
                 btnBrowse.Visible = false;
@@ -47,6 +48,7 @@ namespace CourseWork
                 else
                     parserHelper = new ParseHelper(new Uri(tbUrl.Text));
                 parserHelper.OnPlayerProcessed += Parser_OnPlayerProcessed;
+                parserHelper.OnProcessed += ParserHelper_OnProcessed;
                 tspbProgress.Maximum = parserHelper.PlayersLinksCount;
                 left = parserHelper.PlayersLinksCount;
                 succes = 0;
@@ -67,12 +69,22 @@ namespace CourseWork
 
         private void btnParse_Click(object sender, EventArgs e)
         {
+            aborted = false;
             lbPlayers.Items.Clear();
             if (parserHelper != null)
             {
                 parserHelper.Parse(slideSwitch.Value == 0 ? (int)numStep.Value : (int)numThreads.Value, slideSwitch.Value == 0);
-                tslThreads.Text = $"Threads:  { (slideSwitch.Value == 0 ? Math.Ceiling(parserHelper.PlayersLinksCount/ numStep.Value).ToString() : numThreads.Value.ToString())}";
                 tslStatus.Text = "Status: Parsing";
+                btnAbort.Visible = true;
+            }
+        }
+
+        private void btnAbort_Click(object sender, EventArgs e)
+        {
+            if (parserHelper != null)
+            {
+                aborted = true;
+                parserHelper.Abort();
             }
         }
 
@@ -83,9 +95,9 @@ namespace CourseWork
             tslLeft.Text = $"Left: {left}";
             tslSuccess.Text = $"Success: {succes}";
             lbPlayers.Items.Add(player.Nickname);
-            if(cbLive.Checked)
+            if (cbLive.Checked)
                 playerView.Update(player, false);
-            
+
         }
 
         private void Parser_OnPlayerProcessed(Player player, bool error)
@@ -94,10 +106,11 @@ namespace CourseWork
                 succes++;
             else
                 this.error++;
-                
+
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action<Player>((p) => {
+                this.Invoke(new Action<Player>((p) =>
+                {
                     RecievePlayer(p);
                 }), player);
             }
@@ -107,13 +120,47 @@ namespace CourseWork
             }
         }
 
+        private void DoneParsing()
+        {
+            btnAbort.Visible = false;
+            if (!aborted)
+                tslStatus.Text = "Status: Success";
+            else
+                tslStatus.Text = "Status: Aborted";
+        }
+
+        private void ParserHelper_OnProcessed()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => { DoneParsing(); }));
+            }
+            else
+            {
+                DoneParsing();
+            }
+           
+        }
+
         private void tbUrl_TextChanged(object sender, EventArgs e)
         {
             btnBrowse.Visible = tbUrl.Text == "";
         }
 
+        private void numStep_ValueChanged(object sender, EventArgs e)
+        {
+            tslThreads.Text = $"Threads:  {Math.Ceiling(parserHelper.PlayersLinksCount / numStep.Value).ToString()}";
+        }
+
+        private void numThreads_ValueChanged(object sender, EventArgs e)
+        {
+            tslThreads.Text = $"Threads:  {numThreads.Value.ToString()}";
+
+        }
+
         private void slideSwitch_Scroll(object sender, EventArgs e)
         {
+            tslThreads.Text = $"Threads:  { (slideSwitch.Value == 0 ? Math.Ceiling(parserHelper.PlayersLinksCount / numStep.Value).ToString() : numThreads.Value.ToString())}";
             panelStep.Enabled = slideSwitch.Value == 0;
             panelThread.Enabled = slideSwitch.Value == 1;
         }
