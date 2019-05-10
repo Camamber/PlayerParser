@@ -35,6 +35,9 @@ namespace CourseWork
 
         private WebProxy CheckProxy(string adress)
         {
+            if (adress == null || adress == "")
+                return null;
+
             WebProxy proxy = new WebProxy(adress);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(@"https://www.google.com");
             request.Proxy = proxy;
@@ -44,12 +47,7 @@ namespace CourseWork
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                        return proxy;
-                    else
-                        return null;
-                }
+                    return proxy;
             }
             catch
             {
