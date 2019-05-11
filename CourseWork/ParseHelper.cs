@@ -156,7 +156,8 @@ namespace CourseWork
 
         public int PlayersLinksCount
         {
-            get { return links.Count; }
+            //get { return links.Count; }
+            get { return 10; }
         }
     }
 }

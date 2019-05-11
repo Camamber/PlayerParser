@@ -12,11 +12,10 @@ namespace CourseWork
 
     class Parser
     {
-
         List<string> links;
         Thread thread;
         int start, end;
-        WebProxy proxy;
+        string proxy;
 
         public delegate void OnPlayerParsedHandler(Player player, bool error);
         public event OnPlayerParsedHandler OnPlayerParsed;
@@ -26,7 +25,7 @@ namespace CourseWork
 
         public Parser(string proxy, List<string> playersLinks, int start = 0, int end = 0)
         {
-            this.proxy = CheckProxy(proxy);
+            this.proxy = proxy;
             links = playersLinks;
             this.start = start;
             this.end = end > 0 ? end : playersLinks.Count;
@@ -65,7 +64,7 @@ namespace CourseWork
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             //HtmlWeb web = new HtmlWeb();  
             WebClient wc = new WebClient();
-            wc.Proxy = this.proxy;
+            wc.Proxy = CheckProxy(proxy);
 
             for (int i = start; i < end; i++)
             {                            
@@ -96,7 +95,7 @@ namespace CourseWork
                                 player.Country = description.ParentNode.ChildNodes[3].SelectSingleNode("./a").InnerText;
                                 break;
                             case "Status:":
-                                player.Status = description.ParentNode.ChildNodes[3].InnerText;
+                                player.Status = description.ParentNode.ChildNodes[3].InnerText.TrimEnd('\r', '\n'); ;
                                 break;
                             case "Role(s):":
                                 player.Role = description.ParentNode.ChildNodes[3].FirstChild.InnerText;
