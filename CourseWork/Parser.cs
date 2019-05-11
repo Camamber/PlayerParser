@@ -79,31 +79,7 @@ namespace CourseWork
                     var infoDescription = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'infobox-description')]");
                     foreach (var description in infoDescription)
                     {
-                        switch (description.InnerText)
-                        {
-                            case "Name:":
-                                player.Name = description.ParentNode.ChildNodes[3].InnerText;
-                                break;
-                            case "Romanized Name:":
-                                player.Name = description.ParentNode.ChildNodes[3].InnerText;
-                                break;
-                            case "Birth:":
-                                string tmp = description.ParentNode.ChildNodes[3].InnerText;
-                                player.Birth = DateTime.Parse(tmp.Remove(tmp.IndexOf("(")));
-                                break;
-                            case "Country:":
-                                player.Country = description.ParentNode.ChildNodes[3].SelectSingleNode("./a").InnerText;
-                                break;
-                            case "Status:":
-                                player.Status = description.ParentNode.ChildNodes[3].InnerText.TrimEnd('\r', '\n'); ;
-                                break;
-                            case "Role(s):":
-                                player.Role = description.ParentNode.ChildNodes[3].FirstChild.InnerText;
-                                break;
-                            case "Approx. Total Earnings:":
-                                player.TotalEarnings = description.ParentNode.ChildNodes[3].InnerText;
-                                break;
-                        }
+                        ParseByDescription(description, player);
                     }
                     OnPlayerParsed(player, false);
                 }
@@ -114,6 +90,35 @@ namespace CourseWork
             }
             wc.Dispose();
             OnParsed(this);
+        }
+
+        private void ParseByDescription(HtmlNode description, Player player)
+        {
+            switch (description.InnerText)
+            {
+                case "Name:":
+                    player.Name = description.ParentNode.ChildNodes[3].InnerText;
+                    break;
+                case "Romanized Name:":
+                    player.Name = description.ParentNode.ChildNodes[3].InnerText;
+                    break;
+                case "Birth:":
+                    string tmp = description.ParentNode.ChildNodes[3].InnerText;
+                    player.Birth = DateTime.Parse(tmp.Remove(tmp.IndexOf("(")));
+                    break;
+                case "Country:":
+                    player.Country = description.ParentNode.ChildNodes[3].SelectSingleNode("./a").InnerText;
+                    break;
+                case "Status:":
+                    player.Status = description.ParentNode.ChildNodes[3].InnerText.TrimEnd('\r', '\n'); ;
+                    break;
+                case "Role(s):":
+                    player.Role = description.ParentNode.ChildNodes[3].FirstChild.InnerText;
+                    break;
+                case "Approx. Total Earnings:":
+                    player.TotalEarnings = description.ParentNode.ChildNodes[3].InnerText;
+                    break;
+            }
         }
 
         public void Start()
